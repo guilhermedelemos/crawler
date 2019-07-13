@@ -11,8 +11,10 @@
             crossorigin="anonymous"></script>
         <script src="crawler.js"></script>
         <script>
+            const Crawler = crawler.default;
             const obj = new Crawler();
-            console.log("Resultado", obj.execute(false, false));
+            console.log('crawler', obj.execute(false, false));
+            // console.log('crawler', (new crawler.default()).execute(false, false));
         </script>
     </body>
 </html>
