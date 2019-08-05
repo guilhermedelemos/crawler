@@ -1,1 +1,4 @@
-# crawler
+# Crawler
+
+## Build
+`$ npm run build`
