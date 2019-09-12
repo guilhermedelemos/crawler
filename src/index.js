@@ -245,11 +245,11 @@ class Crawler {
     }
 
     getElementHeight(element) {
-        return $(element).innerHeight();
+        return $(element).height();
     }
 
     getElementWidth(element) {
-        return $(element).innerWidth();
+        return $(element).width();
     }
 
     getElementInnerHeight(element) {
