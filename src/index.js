@@ -3,10 +3,7 @@
 import enableTrueVisibility from './visibility.js';
 enableTrueVisibility();
 
-const ARIA_LANDMARKS = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region',
-    'search'
-];
-
+const ARIA_LANDMARKS = ['banner', 'complementary', 'contentinfo', 'form', 'main', 'navigation', 'region', 'search'];
 const CLASS_OTHER = 'other';
 
 class Crawler {
@@ -78,6 +75,7 @@ class Crawler {
             tag: this.getElementTagName(element),
             role: this.getElementRole(element),
             childrenCount: this.getElementChildrenCount(element),
+            childrenCountAll: this.getElementChildrenCount(element, true),
             posX: this.getElementPosX(element),
             posY: this.getElementPosY(element),
             offsetX: this.getElementOffsetX(element),
@@ -240,8 +238,25 @@ class Crawler {
         return element.tagName;
     }
 
-    getElementChildrenCount(element) {
-        return element.children.length;
+    getElementChildrenCount(element, recursive=false) {
+        if(recursive) {
+            return this.getChildrenCount(element, true);
+        } else {
+            return element.children.length;
+        }
+    }
+    
+    getChildrenCount(parent, getChildrensChildren){
+        var relevantChildren = 0;
+        var children = parent.childNodes.length;
+        for(var i=0; i < children; i++){
+            if(parent.childNodes[i].nodeType != 3){
+                if(getChildrensChildren)
+                    relevantChildren += this.getChildrenCount(parent.childNodes[i],true);
+                relevantChildren++;
+            }
+        }
+        return relevantChildren;
     }
 
     getElementHeight(element) {
